@@ -28,6 +28,22 @@ public class GlobalExceptionHandler {
                 .body(erro);
     }
 
+    @ExceptionHandler(CredenciaisInvalidasException.class)
+    public ResponseEntity<ErroResponse> tratarCredenciaisInvalidas(
+            CredenciaisInvalidasException exception
+    ) {
+
+        ErroResponse erro = new ErroResponse(
+                HttpStatus.UNAUTHORIZED.value(),
+                "Credenciais inválidas",
+                exception.getMessage()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(erro);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErroResponse> tratarValidacao(
             MethodArgumentNotValidException exception

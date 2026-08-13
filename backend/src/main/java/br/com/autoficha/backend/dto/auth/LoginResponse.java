@@ -1,0 +1,20 @@
+package br.com.autoficha.backend.dto.auth;
+
+public class LoginResponse {
+
+    private String token;
+    private String tipo;
+
+    public LoginResponse(String token) {
+        this.token = token;
+        this.tipo = "Bearer";
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+}
