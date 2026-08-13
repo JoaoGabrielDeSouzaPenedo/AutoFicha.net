@@ -5,23 +5,24 @@ export default defineConfig({
   plugins: [react()],
 
   server: {
+    host: '0.0.0.0',
+    port: 5173,
+    strictPort: true,
 
     allowedHosts: [
       '.trycloudflare.com'
     ],
 
     proxy: {
-
       '/auth': {
-        target: 'http://localhost:8080',
+        target: 'http://127.0.0.1:8080',
         changeOrigin: true
       },
 
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'http://127.0.0.1:8080',
         changeOrigin: true
       }
-
     }
   }
 })
