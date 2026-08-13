@@ -1,0 +1,19 @@
+services:
+
+  postgres:
+    image: postgres:16
+    container_name: autoficha-postgres
+
+    environment:
+      POSTGRES_DB: autoficha
+      POSTGRES_USER: autoficha
+      POSTGRES_PASSWORD: autoficha123
+
+    ports:
+      - "5433:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
