@@ -1,0 +1,271 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #0b1020;
+    color: #f5f7ff;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* LOGIN E CADASTRO */
+
+.auth-page {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.auth-side {
+    padding: 50px 70px;
+
+    background:
+            radial-gradient(
+                    circle at 20% 20%,
+                    rgba(113, 72, 255, 0.35),
+                    transparent 35%
+            ),
+            linear-gradient(
+                    135deg,
+                    #11162a,
+                    #17122c
+            );
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand h1 {
+    font-size: 24px;
+}
+
+.brand-icon {
+    color: #8b6cff;
+    font-size: 30px;
+}
+
+.hero-content {
+    margin-bottom: 100px;
+}
+
+.hero-content h2 {
+    font-size: 52px;
+    line-height: 1.05;
+    margin-bottom: 24px;
+}
+
+.hero-content p {
+    max-width: 480px;
+    color: #aeb5ca;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.auth-form-area {
+    background: #0b1020;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 40px;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 430px;
+}
+
+.auth-card h2 {
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #8e96aa;
+    margin-bottom: 34px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-size: 14px;
+    color: #c5cada;
+}
+
+.form-group input {
+    background: #131a2d;
+    border: 1px solid #252e48;
+    color: white;
+    padding: 14px 16px;
+    border-radius: 9px;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: #8064ff;
+}
+
+.primary-button {
+    width: 100%;
+    border: none;
+    border-radius: 9px;
+    padding: 14px 18px;
+    background: #7657ff;
+    color: white;
+    font-weight: 600;
+}
+
+.primary-button:hover {
+    background: #876dff;
+}
+
+.primary-button.small {
+    width: auto;
+}
+
+.secondary-button {
+    border: 1px solid #2c3551;
+    background: transparent;
+    color: white;
+    padding: 9px 18px;
+    border-radius: 8px;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 26px;
+    color: #8e96aa;
+}
+
+.auth-footer a {
+    color: #907aff;
+    text-decoration: none;
+}
+
+/* DASHBOARD */
+
+.dashboard {
+    min-height: 100vh;
+    background: #0b1020;
+}
+
+.dashboard-header {
+    height: 75px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 60px;
+
+    border-bottom: 1px solid #202840;
+}
+
+.user-area {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    color: #b5bbcc;
+}
+
+.dashboard-content {
+    max-width: 1200px;
+    margin: auto;
+    padding: 60px 30px;
+}
+
+.dashboard-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 45px;
+}
+
+.dashboard-title h2 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.dashboard-title p {
+    color: #8e96aa;
+}
+
+.empty-state {
+    min-height: 380px;
+
+    border: 1px dashed #303955;
+    border-radius: 16px;
+
+    background: #101629;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    padding: 40px;
+}
+
+.empty-icon {
+    font-size: 60px;
+    color: #7657ff;
+    margin-bottom: 20px;
+}
+
+.empty-state h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    color: #8e96aa;
+    margin-bottom: 25px;
+}
+
+/* CELULAR */
+
+@media (max-width: 850px) {
+
+    .auth-page {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-side {
+        display: none;
+    }
+
+    .dashboard-header {
+        padding: 0 20px;
+    }
+
+    .dashboard-title {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 20px;
+    }
+}
