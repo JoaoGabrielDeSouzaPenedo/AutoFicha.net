@@ -71,4 +71,19 @@ public class GlobalExceptionHandler {
                 .badRequest()
                 .body(erro);
     }
+    @ExceptionHandler(PersonagemNaoEncontradoException.class)
+    public ResponseEntity<ErroResponse> tratarPersonagemNaoEncontrado(
+            PersonagemNaoEncontradoException exception
+    ) {
+
+        ErroResponse erro = new ErroResponse(
+                HttpStatus.NOT_FOUND.value(),
+                "Personagem não encontrado",
+                exception.getMessage()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(erro);
+    }
 }
