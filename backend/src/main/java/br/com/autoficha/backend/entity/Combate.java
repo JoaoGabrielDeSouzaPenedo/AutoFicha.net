@@ -1,5 +1,6 @@
 package br.com.autoficha.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,13 +11,10 @@ public class Combate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "personagem_id", nullable = false, unique = true)
     private Personagem personagem;
-
-    // =========================
-    // DEFESA
-    // =========================
 
     private Integer defesaTotal = 10;
     private Integer defesaBase = 10;
@@ -25,10 +23,6 @@ public class Combate {
     private Integer defesaRefinamento = 0;
     private Integer defesaOutros = 0;
 
-    // =========================
-    // CD
-    // =========================
-
     private Integer cdTotal = 10;
     private Integer cdBase = 10;
     private Integer cdAtributo = 0;
@@ -36,40 +30,20 @@ public class Combate {
     private Integer cdRefinamento = 0;
     private Integer cdOutros = 0;
 
-    // =========================
-    // DESLOCAMENTO
-    // =========================
-
     private Integer deslocamento = 9;
-
-    // =========================
-    // ATENÇÃO
-    // =========================
 
     private Integer atencaoTotal = 10;
     private Integer atencaoBase = 10;
     private Integer atencaoPercepcao = 0;
     private Integer atencaoOutros = 0;
 
-    // =========================
-    // INICIATIVA
-    // =========================
-
     private Integer iniciativaTotal = 0;
     private Integer iniciativaDestreza = 0;
     private Integer iniciativaOutros = 0;
 
-    // =========================
-    // JOGADAS DE ATAQUE
-    // =========================
-
     private Integer ataqueCorpoACorpo = 0;
     private Integer ataqueDistancia = 0;
     private Integer ataqueEnergia = 0;
-
-    // =========================
-    // TESTES DE RESISTÊNCIA
-    // =========================
 
     private Integer astucia = 0;
     private Integer fortitude = 0;
@@ -77,16 +51,8 @@ public class Combate {
     private Integer reflexos = 0;
     private Integer vontade = 0;
 
-    // =========================
-    // TESTES DE MORTE
-    // =========================
-
     private Integer sucessosMorte = 0;
     private Integer falhasMorte = 0;
-
-    // =========================
-    // DADOS DE EVOLUÇÃO
-    // =========================
 
     private Integer dadoPvD6 = 0;
     private Integer dadoPvD8 = 0;

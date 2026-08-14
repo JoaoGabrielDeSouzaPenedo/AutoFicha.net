@@ -1,5 +1,6 @@
 package br.com.autoficha.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,48 +11,25 @@ public class Atributos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "personagem_id", nullable = false, unique = true)
     private Personagem personagem;
 
-    // =========================
-    // FORÇA
-    // =========================
-
     private Integer forcaValor = 10;
     private Integer forcaMod = 0;
-
-    // =========================
-    // DESTREZA
-    // =========================
 
     private Integer destrezaValor = 10;
     private Integer destrezaMod = 0;
 
-    // =========================
-    // CONSTITUIÇÃO
-    // =========================
-
     private Integer constituicaoValor = 10;
     private Integer constituicaoMod = 0;
-
-    // =========================
-    // INTELIGÊNCIA
-    // =========================
 
     private Integer inteligenciaValor = 10;
     private Integer inteligenciaMod = 0;
 
-    // =========================
-    // SABEDORIA
-    // =========================
-
     private Integer sabedoriaValor = 10;
     private Integer sabedoriaMod = 0;
-
-    // =========================
-    // PRESENÇA
-    // =========================
 
     private Integer presencaValor = 10;
     private Integer presencaMod = 0;

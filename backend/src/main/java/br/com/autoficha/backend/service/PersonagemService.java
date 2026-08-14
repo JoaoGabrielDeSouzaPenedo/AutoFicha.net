@@ -1,5 +1,6 @@
 package br.com.autoficha.backend.service;
 
+import br.com.autoficha.backend.dto.personagem.PersonagemResponse;
 import br.com.autoficha.backend.dto.personagem.AtualizarPersonagemRequest;
 import br.com.autoficha.backend.dto.personagem.CriarPersonagemRequest;
 import br.com.autoficha.backend.dto.personagem.PersonagemResumoResponse;
@@ -237,5 +238,16 @@ public class PersonagemService {
                 buscarEntidade(id, username);
 
         personagemRepository.delete(personagem);
+    }
+    @Transactional(readOnly = true)
+    public PersonagemResponse buscar(
+            Long id,
+            String username
+    ) {
+
+        Personagem personagem =
+                buscarEntidade(id, username);
+
+        return PersonagemResponse.from(personagem);
     }
 }

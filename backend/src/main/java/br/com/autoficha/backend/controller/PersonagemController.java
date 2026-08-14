@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
+import br.com.autoficha.backend.dto.personagem.PersonagemResponse;
 import java.util.List;
 
 @RestController
@@ -81,5 +81,18 @@ public class PersonagemController {
         );
 
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<PersonagemResponse> buscar(
+            @PathVariable Long id,
+            Authentication authentication
+    ) {
+
+        return ResponseEntity.ok(
+                personagemService.buscar(
+                        id,
+                        authentication.getName()
+                )
+        );
     }
 }

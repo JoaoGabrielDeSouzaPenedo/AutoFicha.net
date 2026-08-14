@@ -1,6 +1,7 @@
 package br.com.autoficha.backend.entity;
 
 import br.com.autoficha.backend.enums.AtributoBase;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,6 +12,7 @@ public class PericiaPersonagem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "personagem_id", nullable = false)
     private Personagem personagem;

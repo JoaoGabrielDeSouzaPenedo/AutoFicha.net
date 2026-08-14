@@ -1,5 +1,6 @@
 package br.com.autoficha.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -12,6 +13,7 @@ public class TotemInventario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "personagem_id", nullable = false)
     private Personagem personagem;
@@ -21,7 +23,7 @@ public class TotemInventario {
 
     private Integer quantidade = 1;
 
-    @Column(precision = 8, scale = 2)
+    @Column(precision = 10, scale = 2)
     private BigDecimal peso = BigDecimal.ZERO;
 
     @Column(precision = 12, scale = 2)

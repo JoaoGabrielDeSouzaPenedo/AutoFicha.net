@@ -2,6 +2,7 @@ package br.com.autoficha.backend.entity;
 
 import br.com.autoficha.backend.enums.AtributoBase;
 import br.com.autoficha.backend.enums.TipoAlma;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,6 +13,7 @@ public class PerfilAlma {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "personagem_id", nullable = false, unique = true)
     private Personagem personagem;
@@ -25,20 +27,12 @@ public class PerfilAlma {
     @Enumerated(EnumType.STRING)
     private AtributoBase atributoPrincipal;
 
-    // =========================
-    // CD ESPIRITUAL
-    // =========================
-
     private Integer cdEspiritualTotal = 10;
     private Integer cdEspiritualBase = 10;
     private Integer cdEspiritualAtributo = 0;
     private Integer cdEspiritualTreino = 0;
     private Integer cdEspiritualNivel = 0;
     private Integer cdEspiritualOutros = 0;
-
-    // =========================
-    // NÍVEIS DOS DONS
-    // =========================
 
     private Integer controleElemental = 0;
     private Integer fortificador = 0;

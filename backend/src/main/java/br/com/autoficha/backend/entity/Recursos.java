@@ -1,6 +1,7 @@
 package br.com.autoficha.backend.entity;
 
 import br.com.autoficha.backend.enums.EstadoAlma;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,36 +12,20 @@ public class Recursos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "personagem_id", nullable = false, unique = true)
     private Personagem personagem;
 
-    // =========================
-    // PONTOS DE VIDA
-    // =========================
-
     private Integer pvAtual = 0;
-
     private Integer pvMaximo = 0;
-
     private Integer pvTemporario = 0;
 
-    // =========================
-    // PONTOS DE ENERGIA
-    // =========================
-
     private Integer peAtual = 0;
-
     private Integer peMaximo = 0;
-
     private Integer peTemporario = 0;
 
-    // =========================
-    // INTEGRIDADE DA ALMA
-    // =========================
-
     private Integer integridadeAlmaAtual = 100;
-
     private Integer integridadeAlmaMaxima = 100;
 
     @Enumerated(EnumType.STRING)
