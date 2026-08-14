@@ -1,70 +1,154 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
+import api from "../api/api";
 
 function Login() {
+
+    const navigate = useNavigate();
+
+    const [username, setUsername] = useState("");
+    const [senha, setSenha] = useState("");
+
+    const [erro, setErro] = useState("");
+    const [carregando, setCarregando] = useState(false);
+
+    async function handleSubmit(event) {
+
+        event.preventDefault();
+
+        setErro("");
+        setCarregando(true);
+
+        try {
+
+            const response = await api.post("/auth/login", {
+                username,
+                senha
+            });
+
+            if (!response?.token) {
+                throw new Error(
+                    "O servidor não retornou o token."
+                );
+            }
+
+            localStorage.setItem(
+                "token",
+                response.token
+            );
+
+            localStorage.setItem(
+                "tipoToken",
+                response.tipo || "Bearer"
+            );
+
+            navigate("/dashboard");
+
+        } catch (error) {
+
+            console.error("Erro no login:", error);
+
+            localStorage.removeItem("token");
+            localStorage.removeItem("tipoToken");
+
+            if (error.message === "Failed to fetch") {
+
+                setErro(
+                    "Não foi possível conectar ao servidor. Verifique se o backend está ligado."
+                );
+
+            } else {
+
+                setErro(
+                    error?.data?.mensagem ||
+                    error?.data?.message ||
+                    error?.message ||
+                    "Usuário ou senha inválidos."
+                );
+            }
+
+        } finally {
+
+            setCarregando(false);
+        }
+    }
+
     return (
-        <main className="auth-page">
+        <div className="auth-page">
 
-            <section className="auth-side">
-                <div className="brand">
-                    <span className="brand-icon">◆</span>
-                    <h1>AutoFicha</h1>
-                </div>
+            <div className="auth-left">
 
-                <div className="hero-content">
-                    <h2>
-                        Suas fichas.
-                        <br />
-                        Suas aventuras.
-                    </h2>
+                <div className="auth-hero">
+
+                    <h1>
+                        Sua história.<br />
+                        Sua aventura.
+                    </h1>
 
                     <p>
-                        Crie, organize e automatize suas fichas de RPG
-                        em um único lugar.
+                        Todas as suas fichas em um só lugar.
                     </p>
+
                 </div>
-            </section>
 
-            <section className="auth-form-area">
+            </div>
 
-                <div className="auth-card">
+            <div className="auth-right">
 
-                    <h2>Bem-vindo de volta</h2>
+                <div className="auth-form-container">
 
-                    <p className="subtitle">
-                        Entre na sua conta para continuar.
+                    <h1>Entrar</h1>
+
+                    <p>
+                        Acesse sua conta para continuar.
                     </p>
 
-                    <form>
+                    <form onSubmit={handleSubmit}>
 
-                        <div className="form-group">
-                            <label>Usuário</label>
+                        <label>Usuário</label>
 
-                            <input
-                                type="text"
-                                placeholder="Digite seu usuário"
-                            />
-                        </div>
+                        <input
+                            type="text"
+                            placeholder="Seu usuário"
+                            value={username}
+                            onChange={(event) =>
+                                setUsername(event.target.value)
+                            }
+                            required
+                        />
 
-                        <div className="form-group">
-                            <label>Senha</label>
+                        <label>Senha</label>
 
-                            <input
-                                type="password"
-                                placeholder="Digite sua senha"
-                            />
-                        </div>
+                        <input
+                            type="password"
+                            placeholder="Sua senha"
+                            value={senha}
+                            onChange={(event) =>
+                                setSenha(event.target.value)
+                            }
+                            required
+                        />
+
+                        {erro && (
+                            <div className="auth-error">
+                                {erro}
+                            </div>
+                        )}
 
                         <button
-                            className="primary-button"
                             type="submit"
+                            disabled={carregando}
                         >
-                            Entrar
+                            {carregando
+                                ? "Entrando..."
+                                : "Entrar"}
                         </button>
 
                     </form>
 
                     <p className="auth-footer">
-                        Ainda não possui uma conta?{" "}
+                        Ainda não possui conta?{" "}
                         <Link to="/cadastro">
                             Criar conta
                         </Link>
@@ -72,9 +156,9 @@ function Login() {
 
                 </div>
 
-            </section>
+            </div>
 
-        </main>
+        </div>
     );
 }
 

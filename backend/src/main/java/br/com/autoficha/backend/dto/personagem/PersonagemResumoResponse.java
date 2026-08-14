@@ -1,19 +1,26 @@
 package br.com.autoficha.backend.dto.personagem;
 
 import br.com.autoficha.backend.entity.Personagem;
-
-import java.time.LocalDateTime;
+import br.com.autoficha.backend.enums.FamiliaNobre;
+import br.com.autoficha.backend.enums.TipoAntecedente;
+import br.com.autoficha.backend.enums.TipoDefeito;
 
 public class PersonagemResumoResponse {
 
     private Long id;
+
     private String nome;
     private String jogador;
-    private String antecedente;
+
+    private TipoAntecedente antecedente;
+    private FamiliaNobre familiaNobre;
+    private TipoDefeito defeito;
+
     private String campanha;
-    private String imagemUrl;
+    private String profissao;
+
     private Integer refinamento;
-    private LocalDateTime dataAtualizacao;
+    private Integer maestria;
 
     public PersonagemResumoResponse() {
     }
@@ -24,13 +31,19 @@ public class PersonagemResumoResponse {
                 new PersonagemResumoResponse();
 
         response.id = personagem.getId();
+
         response.nome = personagem.getNome();
         response.jogador = personagem.getJogador();
+
         response.antecedente = personagem.getAntecedente();
+        response.familiaNobre = personagem.getFamiliaNobre();
+        response.defeito = personagem.getDefeito();
+
         response.campanha = personagem.getCampanha();
-        response.imagemUrl = personagem.getImagemUrl();
+        response.profissao = personagem.getProfissao();
+
         response.refinamento = personagem.getRefinamento();
-        response.dataAtualizacao = personagem.getDataAtualizacao();
+        response.maestria = personagem.getMaestria();
 
         return response;
     }
@@ -47,23 +60,31 @@ public class PersonagemResumoResponse {
         return jogador;
     }
 
-    public String getAntecedente() {
+    public TipoAntecedente getAntecedente() {
         return antecedente;
+    }
+
+    public FamiliaNobre getFamiliaNobre() {
+        return familiaNobre;
+    }
+
+    public TipoDefeito getDefeito() {
+        return defeito;
     }
 
     public String getCampanha() {
         return campanha;
     }
 
-    public String getImagemUrl() {
-        return imagemUrl;
+    public String getProfissao() {
+        return profissao;
     }
 
     public Integer getRefinamento() {
         return refinamento;
     }
 
-    public LocalDateTime getDataAtualizacao() {
-        return dataAtualizacao;
+    public Integer getMaestria() {
+        return maestria;
     }
 }

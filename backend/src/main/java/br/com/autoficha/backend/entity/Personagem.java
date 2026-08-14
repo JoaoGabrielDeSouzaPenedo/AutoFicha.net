@@ -1,6 +1,9 @@
 package br.com.autoficha.backend.entity;
 
+import br.com.autoficha.backend.enums.FamiliaNobre;
 import br.com.autoficha.backend.enums.Genero;
+import br.com.autoficha.backend.enums.TipoAntecedente;
+import br.com.autoficha.backend.enums.TipoDefeito;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -35,8 +38,13 @@ public class Personagem {
     @Column(length = 100)
     private String jogador;
 
+    @Enumerated(EnumType.STRING)
     @Column(length = 100)
-    private String antecedente;
+    private TipoAntecedente antecedente;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "familia_nobre", length = 100)
+    private FamiliaNobre familiaNobre;
 
     @Column(length = 100)
     private String campanha;
@@ -44,8 +52,9 @@ public class Personagem {
     @Column(name = "manual_de_luta", length = 100)
     private String manualDeLuta;
 
+    @Enumerated(EnumType.STRING)
     @Column(length = 100)
-    private String defeito;
+    private TipoDefeito defeito;
 
     @Column(name = "pt_gastos")
     private Integer ptGastos = 0;
@@ -185,6 +194,13 @@ public class Personagem {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+    private List<TesteResistencia> testesResistencia = new ArrayList<>();
+
+    @OneToMany(
+            mappedBy = "personagem",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private List<Ataque> ataques = new ArrayList<>();
 
     @OneToMany(
@@ -292,12 +308,20 @@ public class Personagem {
         this.jogador = jogador;
     }
 
-    public String getAntecedente() {
+    public TipoAntecedente getAntecedente() {
         return antecedente;
     }
 
-    public void setAntecedente(String antecedente) {
+    public void setAntecedente(TipoAntecedente antecedente) {
         this.antecedente = antecedente;
+    }
+
+    public FamiliaNobre getFamiliaNobre() {
+        return familiaNobre;
+    }
+
+    public void setFamiliaNobre(FamiliaNobre familiaNobre) {
+        this.familiaNobre = familiaNobre;
     }
 
     public String getCampanha() {
@@ -316,11 +340,11 @@ public class Personagem {
         this.manualDeLuta = manualDeLuta;
     }
 
-    public String getDefeito() {
+    public TipoDefeito getDefeito() {
         return defeito;
     }
 
-    public void setDefeito(String defeito) {
+    public void setDefeito(TipoDefeito defeito) {
         this.defeito = defeito;
     }
 
@@ -618,6 +642,39 @@ public class Personagem {
 
 
     // =========================
+    // TESTES DE RESISTÊNCIA
+    // =========================
+
+    public List<TesteResistencia> getTestesResistencia() {
+        return testesResistencia;
+    }
+
+    public void setTestesResistencia(
+            List<TesteResistencia> testesResistencia
+    ) {
+
+        this.testesResistencia.clear();
+
+        if (testesResistencia != null) {
+
+            for (TesteResistencia teste : testesResistencia) {
+                adicionarTesteResistencia(teste);
+            }
+        }
+    }
+
+    public void adicionarTesteResistencia(
+            TesteResistencia teste
+    ) {
+
+        if (teste != null) {
+            teste.setPersonagem(this);
+            this.testesResistencia.add(teste);
+        }
+    }
+
+
+    // =========================
     // ATAQUES
     // =========================
 
@@ -802,6 +859,10 @@ public class Personagem {
         }
     }
 
+
+    // =========================
+    // DATAS
+    // =========================
 
     public LocalDateTime getDataCriacao() {
         return dataCriacao;

@@ -1,91 +1,161 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
+import api from "../api/api";
 
 function Cadastro() {
+
+    const navigate = useNavigate();
+
+    const [nome, setNome] = useState("");
+    const [username, setUsername] = useState("");
+    const [senha, setSenha] = useState("");
+
+    const [erro, setErro] = useState("");
+    const [carregando, setCarregando] = useState(false);
+
+    async function handleSubmit(event) {
+
+        event.preventDefault();
+
+        setErro("");
+        setCarregando(true);
+
+        try {
+
+            await api.post("/auth/register", {
+                nome,
+                username,
+                senha
+            });
+
+            navigate("/login");
+
+        } catch (error) {
+
+            console.error("Erro no cadastro:", error);
+
+            if (error.message === "Failed to fetch") {
+                setErro(
+                    "Não foi possível conectar ao servidor. Verifique se o backend está ligado."
+                );
+            } else {
+                setErro(
+                    error?.data?.mensagem ||
+                    error?.data?.message ||
+                    error?.message ||
+                    "Não foi possível criar a conta."
+                );
+            }
+
+        } finally {
+
+            setCarregando(false);
+        }
+    }
+
     return (
-        <main className="auth-page">
+        <div className="auth-page">
 
-            <section className="auth-side">
+            <div className="auth-left">
 
-                <div className="brand">
-                    <span className="brand-icon">◆</span>
-                    <h1>AutoFicha</h1>
-                </div>
+                <div className="auth-hero">
 
-                <div className="hero-content">
-                    <h2>
-                        Comece sua
-                        <br />
-                        próxima aventura.
-                    </h2>
+                    <h1>
+                        Sua história.<br />
+                        Sua aventura.
+                    </h1>
 
                     <p>
-                        Crie sua conta e mantenha todas as suas
-                        fichas organizadas.
+                        Crie e gerencie todas as suas fichas.
                     </p>
+
                 </div>
 
-            </section>
+            </div>
 
-            <section className="auth-form-area">
+            <div className="auth-right">
 
-                <div className="auth-card">
+                <div className="auth-form-container">
 
-                    <h2>Criar conta</h2>
+                    <h1>Criar conta</h1>
 
-                    <p className="subtitle">
+                    <p>
                         Preencha seus dados para começar.
                     </p>
 
-                    <form>
+                    <form onSubmit={handleSubmit}>
 
-                        <div className="form-group">
-                            <label>Nome</label>
+                        <label>Nome</label>
 
-                            <input
-                                type="text"
-                                placeholder="Seu nome"
-                            />
-                        </div>
+                        <input
+                            type="text"
+                            placeholder="Seu nome"
+                            value={nome}
+                            onChange={(event) =>
+                                setNome(event.target.value)
+                            }
+                            maxLength={100}
+                            required
+                        />
 
-                        <div className="form-group">
-                            <label>Usuário</label>
+                        <label>Usuário</label>
 
-                            <input
-                                type="text"
-                                placeholder="Escolha um usuário"
-                            />
-                        </div>
+                        <input
+                            type="text"
+                            placeholder="Escolha um usuário"
+                            value={username}
+                            onChange={(event) =>
+                                setUsername(event.target.value)
+                            }
+                            minLength={3}
+                            maxLength={50}
+                            required
+                        />
 
-                        <div className="form-group">
-                            <label>Senha</label>
+                        <label>Senha</label>
 
-                            <input
-                                type="password"
-                                placeholder="Escolha uma senha"
-                            />
-                        </div>
+                        <input
+                            type="password"
+                            placeholder="Escolha uma senha"
+                            value={senha}
+                            onChange={(event) =>
+                                setSenha(event.target.value)
+                            }
+                            minLength={6}
+                            maxLength={100}
+                            required
+                        />
+
+                        {erro && (
+                            <div className="auth-error">
+                                {erro}
+                            </div>
+                        )}
 
                         <button
-                            className="primary-button"
                             type="submit"
+                            disabled={carregando}
                         >
-                            Criar conta
+                            {carregando
+                                ? "Criando conta..."
+                                : "Criar conta"}
                         </button>
 
                     </form>
 
                     <p className="auth-footer">
                         Já possui uma conta?{" "}
-                        <Link to="/">
+                        <Link to="/login">
                             Entrar
                         </Link>
                     </p>
 
                 </div>
 
-            </section>
+            </div>
 
-        </main>
+        </div>
     );
 }
 

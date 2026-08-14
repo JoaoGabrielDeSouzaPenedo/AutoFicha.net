@@ -1,11 +1,13 @@
 package br.com.autoficha.backend.dto.personagem;
 
-import br.com.autoficha.backend.entity.*;
+import br.com.autoficha.backend.entity.Personagem;
+import br.com.autoficha.backend.enums.FamiliaNobre;
 import br.com.autoficha.backend.enums.Genero;
+import br.com.autoficha.backend.enums.TipoAntecedente;
+import br.com.autoficha.backend.enums.TipoDefeito;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class PersonagemResponse {
 
@@ -13,19 +15,26 @@ public class PersonagemResponse {
 
     private String nome;
     private String jogador;
-    private String antecedente;
+
+    private TipoAntecedente antecedente;
+    private FamiliaNobre familiaNobre;
+
     private String campanha;
     private String manualDeLuta;
-    private String defeito;
-    private String profissao;
+
+    private TipoDefeito defeito;
 
     private Integer ptGastos;
     private Integer refinamento;
     private Integer maestria;
 
+    private String profissao;
+
     private Integer idade;
+
     private BigDecimal altura;
     private BigDecimal peso;
+
     private Genero genero;
 
     private String cabelos;
@@ -47,19 +56,6 @@ public class PersonagemResponse {
     private BigDecimal dinheiro;
     private BigDecimal limiteEspaco;
 
-    private Atributos atributos;
-    private Recursos recursos;
-    private Combate combate;
-    private PerfilAlma perfilAlma;
-
-    private List<PericiaPersonagem> pericias;
-    private List<Ataque> ataques;
-    private List<HabilidadeTreino> habilidadesTreino;
-    private List<ItemInventario> inventario;
-    private List<TotemInventario> totens;
-    private List<Dom> dons;
-    private List<Pacto> pactos;
-
     private LocalDateTime dataCriacao;
     private LocalDateTime dataAtualizacao;
 
@@ -68,61 +64,103 @@ public class PersonagemResponse {
 
     public static PersonagemResponse from(Personagem personagem) {
 
-        PersonagemResponse response = new PersonagemResponse();
+        PersonagemResponse response =
+                new PersonagemResponse();
 
         response.id = personagem.getId();
 
         response.nome = personagem.getNome();
         response.jogador = personagem.getJogador();
-        response.antecedente = personagem.getAntecedente();
-        response.campanha = personagem.getCampanha();
-        response.manualDeLuta = personagem.getManualDeLuta();
-        response.defeito = personagem.getDefeito();
-        response.profissao = personagem.getProfissao();
 
-        response.ptGastos = personagem.getPtGastos();
-        response.refinamento = personagem.getRefinamento();
-        response.maestria = personagem.getMaestria();
+        response.antecedente =
+                personagem.getAntecedente();
 
-        response.idade = personagem.getIdade();
-        response.altura = personagem.getAltura();
-        response.peso = personagem.getPeso();
-        response.genero = personagem.getGenero();
+        response.familiaNobre =
+                personagem.getFamiliaNobre();
 
-        response.cabelos = personagem.getCabelos();
-        response.olhos = personagem.getOlhos();
-        response.pele = personagem.getPele();
-        response.roupas = personagem.getRoupas();
-        response.marca = personagem.getMarca();
-        response.imagemUrl = personagem.getImagemUrl();
+        response.campanha =
+                personagem.getCampanha();
 
-        response.ideias = personagem.getIdeias();
-        response.ligacoes = personagem.getLigacoes();
-        response.complicacoes = personagem.getComplicacoes();
+        response.manualDeLuta =
+                personagem.getManualDeLuta();
 
-        response.rdResistencias = personagem.getRdResistencias();
-        response.caracteristicasAntecedente = personagem.getCaracteristicasAntecedente();
-        response.passivas = personagem.getPassivas();
-        response.anotacoes = personagem.getAnotacoes();
+        response.defeito =
+                personagem.getDefeito();
 
-        response.dinheiro = personagem.getDinheiro();
-        response.limiteEspaco = personagem.getLimiteEspaco();
+        response.ptGastos =
+                personagem.getPtGastos();
 
-        response.atributos = personagem.getAtributos();
-        response.recursos = personagem.getRecursos();
-        response.combate = personagem.getCombate();
-        response.perfilAlma = personagem.getPerfilAlma();
+        response.refinamento =
+                personagem.getRefinamento();
 
-        response.pericias = personagem.getPericias();
-        response.ataques = personagem.getAtaques();
-        response.habilidadesTreino = personagem.getHabilidadesTreino();
-        response.inventario = personagem.getInventario();
-        response.totens = personagem.getTotens();
-        response.dons = personagem.getDons();
-        response.pactos = personagem.getPactos();
+        response.maestria =
+                personagem.getMaestria();
 
-        response.dataCriacao = personagem.getDataCriacao();
-        response.dataAtualizacao = personagem.getDataAtualizacao();
+        response.profissao =
+                personagem.getProfissao();
+
+        response.idade =
+                personagem.getIdade();
+
+        response.altura =
+                personagem.getAltura();
+
+        response.peso =
+                personagem.getPeso();
+
+        response.genero =
+                personagem.getGenero();
+
+        response.cabelos =
+                personagem.getCabelos();
+
+        response.olhos =
+                personagem.getOlhos();
+
+        response.pele =
+                personagem.getPele();
+
+        response.roupas =
+                personagem.getRoupas();
+
+        response.marca =
+                personagem.getMarca();
+
+        response.imagemUrl =
+                personagem.getImagemUrl();
+
+        response.ideias =
+                personagem.getIdeias();
+
+        response.ligacoes =
+                personagem.getLigacoes();
+
+        response.complicacoes =
+                personagem.getComplicacoes();
+
+        response.rdResistencias =
+                personagem.getRdResistencias();
+
+        response.caracteristicasAntecedente =
+                personagem.getCaracteristicasAntecedente();
+
+        response.passivas =
+                personagem.getPassivas();
+
+        response.anotacoes =
+                personagem.getAnotacoes();
+
+        response.dinheiro =
+                personagem.getDinheiro();
+
+        response.limiteEspaco =
+                personagem.getLimiteEspaco();
+
+        response.dataCriacao =
+                personagem.getDataCriacao();
+
+        response.dataAtualizacao =
+                personagem.getDataAtualizacao();
 
         return response;
     }
@@ -139,8 +177,12 @@ public class PersonagemResponse {
         return jogador;
     }
 
-    public String getAntecedente() {
+    public TipoAntecedente getAntecedente() {
         return antecedente;
+    }
+
+    public FamiliaNobre getFamiliaNobre() {
+        return familiaNobre;
     }
 
     public String getCampanha() {
@@ -151,12 +193,8 @@ public class PersonagemResponse {
         return manualDeLuta;
     }
 
-    public String getDefeito() {
+    public TipoDefeito getDefeito() {
         return defeito;
-    }
-
-    public String getProfissao() {
-        return profissao;
     }
 
     public Integer getPtGastos() {
@@ -169,6 +207,10 @@ public class PersonagemResponse {
 
     public Integer getMaestria() {
         return maestria;
+    }
+
+    public String getProfissao() {
+        return profissao;
     }
 
     public Integer getIdade() {
@@ -245,50 +287,6 @@ public class PersonagemResponse {
 
     public BigDecimal getLimiteEspaco() {
         return limiteEspaco;
-    }
-
-    public Atributos getAtributos() {
-        return atributos;
-    }
-
-    public Recursos getRecursos() {
-        return recursos;
-    }
-
-    public Combate getCombate() {
-        return combate;
-    }
-
-    public PerfilAlma getPerfilAlma() {
-        return perfilAlma;
-    }
-
-    public List<PericiaPersonagem> getPericias() {
-        return pericias;
-    }
-
-    public List<Ataque> getAtaques() {
-        return ataques;
-    }
-
-    public List<HabilidadeTreino> getHabilidadesTreino() {
-        return habilidadesTreino;
-    }
-
-    public List<ItemInventario> getInventario() {
-        return inventario;
-    }
-
-    public List<TotemInventario> getTotens() {
-        return totens;
-    }
-
-    public List<Dom> getDons() {
-        return dons;
-    }
-
-    public List<Pacto> getPactos() {
-        return pactos;
     }
 
     public LocalDateTime getDataCriacao() {

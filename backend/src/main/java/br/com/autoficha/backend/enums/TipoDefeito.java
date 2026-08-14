@@ -1,0 +1,33 @@
+package br.com.autoficha.backend.enums;
+
+public enum TipoDefeito {
+
+    FRACO,
+    CORACAO_MOLE,
+    CURIOSO,
+    DUPLA_PERSONALIDADE,
+    GULOSO,
+    AZARADO,
+    IGNORANTE,
+    DESATENTO,
+    COVARDE,
+    LERDO,
+    INGENUO,
+    VAIDOSO,
+    FURIOSO,
+    SOLITARIO,
+    FRIORENTO,
+    CALORENTO,
+    ORGULHOSO,
+    NERVOSO,
+    PREGUICOSO,
+    RANZINZA,
+    EGOISTA,
+    INCONSTANTE,
+    PESSIMISTA,
+    ATRAPALHADO,
+    MENTIROSO,
+    GANANCIOSO,
+    IMPULSIVO
+
+}

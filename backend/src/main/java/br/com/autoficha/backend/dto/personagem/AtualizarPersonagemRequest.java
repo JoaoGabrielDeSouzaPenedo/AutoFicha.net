@@ -1,6 +1,9 @@
 package br.com.autoficha.backend.dto.personagem;
 
+import br.com.autoficha.backend.enums.FamiliaNobre;
 import br.com.autoficha.backend.enums.Genero;
+import br.com.autoficha.backend.enums.TipoAntecedente;
+import br.com.autoficha.backend.enums.TipoDefeito;
 
 import java.math.BigDecimal;
 
@@ -8,19 +11,26 @@ public class AtualizarPersonagemRequest {
 
     private String nome;
     private String jogador;
-    private String antecedente;
+
+    private TipoAntecedente antecedente;
+    private FamiliaNobre familiaNobre;
+
     private String campanha;
     private String manualDeLuta;
-    private String defeito;
-    private String profissao;
+
+    private TipoDefeito defeito;
 
     private Integer ptGastos;
     private Integer refinamento;
     private Integer maestria;
 
+    private String profissao;
+
     private Integer idade;
+
     private BigDecimal altura;
     private BigDecimal peso;
+
     private Genero genero;
 
     private String cabelos;
@@ -33,6 +43,7 @@ public class AtualizarPersonagemRequest {
     private String ideias;
     private String ligacoes;
     private String complicacoes;
+
     private String rdResistencias;
     private String caracteristicasAntecedente;
     private String passivas;
@@ -60,12 +71,20 @@ public class AtualizarPersonagemRequest {
         this.jogador = jogador;
     }
 
-    public String getAntecedente() {
+    public TipoAntecedente getAntecedente() {
         return antecedente;
     }
 
-    public void setAntecedente(String antecedente) {
+    public void setAntecedente(TipoAntecedente antecedente) {
         this.antecedente = antecedente;
+    }
+
+    public FamiliaNobre getFamiliaNobre() {
+        return familiaNobre;
+    }
+
+    public void setFamiliaNobre(FamiliaNobre familiaNobre) {
+        this.familiaNobre = familiaNobre;
     }
 
     public String getCampanha() {
@@ -84,20 +103,12 @@ public class AtualizarPersonagemRequest {
         this.manualDeLuta = manualDeLuta;
     }
 
-    public String getDefeito() {
+    public TipoDefeito getDefeito() {
         return defeito;
     }
 
-    public void setDefeito(String defeito) {
+    public void setDefeito(TipoDefeito defeito) {
         this.defeito = defeito;
-    }
-
-    public String getProfissao() {
-        return profissao;
-    }
-
-    public void setProfissao(String profissao) {
-        this.profissao = profissao;
     }
 
     public Integer getPtGastos() {
@@ -122,6 +133,14 @@ public class AtualizarPersonagemRequest {
 
     public void setMaestria(Integer maestria) {
         this.maestria = maestria;
+    }
+
+    public String getProfissao() {
+        return profissao;
+    }
+
+    public void setProfissao(String profissao) {
+        this.profissao = profissao;
     }
 
     public Integer getIdade() {
